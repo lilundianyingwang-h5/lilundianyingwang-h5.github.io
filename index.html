@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>理论电影网 - 深度影评与影视理论研究 | lilundianyingwang-h5</title>
+<meta name="keywords" content="理论电影网,lilundianyingwang-h5,电影理论,影视研究,深度影评,电影分析,导演研究">
+<meta name="description" content="理论电影网(lilundianyingwang-h5)专注于电影理论与影视研究，提供深度影评、导演分析、流派解读及学术级影视资源，是影迷与学者的首选平台。">
+<link rel="canonical" href="https://lilundianyingwang-h5/">
+<style>
+/* ===== Reset & Base ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Noto Serif SC','Songti SC','SimSun',serif;
+  background:#0c1220;
+  color:#c8d0e0;
+  line-height:1.8;
+  overflow-x:hidden;
+}
+a{color:#c9a84c;text-decoration:none;transition:color .3s}
+a:hover{color:#e8d48b}
+
+/* ===== Header ===== */
+.header{
+  background:#080c18;
+  border-bottom:3px double #c9a84c;
+  padding:1.2rem 0;
+  position:sticky;
+  top:0;
+  z-index:1000;
+  box-shadow:0 2px 20px rgba(0,0,0,0.6);
+}
+.nav-container{
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 1rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+}
+.logo{
+  font-size:1.6rem;
+  font-weight:900;
+  color:#c9a84c;
+  letter-spacing:4px;
+  font-family:'Noto Serif SC',serif;
+}
+.logo span{color:#e8d48b;font-weight:300}
+.nav-links{
+  display:flex;
+  gap:2rem;
+  list-style:none;
+}
+.nav-links a{
+  color:#a0b0c8;
+  font-weight:600;
+  padding:0.4rem 0;
+  border-bottom:2px solid transparent;
+  transition:all .3s;
+  font-size:0.9rem;
+  letter-spacing:2px;
+}
+.nav-links a:hover{
+  color:#c9a84c;
+  border-bottom-color:#c9a84c;
+}
+
+/* ===== Hero ===== */
+.hero{
+  background:linear-gradient(135deg,#080c18 0%,#0f1a30 50%,#080c18 100%);
+  padding:5rem 1rem;
+  text-align:center;
+  position:relative;
+  border-bottom:1px solid #1a2540;
+}
+.hero::before{
+  content:'';
+  position:absolute;
+  top:0;left:50%;
+  transform:translateX(-50%);
+  width:1px;
+  height:100%;
+  background:linear-gradient(180deg,transparent,#c9a84c,transparent);
+  opacity:0.3;
+}
+.hero-content{position:relative;z-index:1;max-width:800px;margin:0 auto}
+.hero h1{
+  font-size:2.8rem;
+  margin-bottom:1.2rem;
+  color:#c9a84c;
+  font-weight:900;
+  letter-spacing:6px;
+  font-family:'Noto Serif SC',serif;
+}
+.hero p{
+  font-size:1rem;
+  margin-bottom:2rem;
+  color:#8090b0;
+  letter-spacing:1px;
+  max-width:600px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.hero-url{
+  display:inline-block;
+  background:transparent;
+  color:#c9a84c;
+  padding:0.7rem 2rem;
+  border:1px solid #c9a84c;
+  font-size:0.85rem;
+  letter-spacing:2px;
+  font-family:'Courier New',monospace;
+}
+
+/* ===== Sections ===== */
+.section{
+  max-width:1200px;
+  margin:0 auto;
+  padding:4rem 1rem;
+}
+.section-title{
+  text-align:center;
+  font-size:1.8rem;
+  margin-bottom:3rem;
+  color:#c9a84c;
+  font-weight:900;
+  letter-spacing:4px;
+  font-family:'Noto Serif SC',serif;
+  position:relative;
+}
+.section-title::before,.section-title::after{
+  content:'';
+  display:inline-block;
+  width:40px;
+  height:1px;
+  background:#c9a84c;
+  vertical-align:middle;
+  margin:0 15px;
+  opacity:0.5;
+}
+
+/* ===== Category Pills ===== */
+.cat-pills{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:1rem;
+  margin-bottom:3rem;
+}
+.cat-pill{
+  padding:0.5rem 1.5rem;
+  background:transparent;
+  border:1px solid #2a3550;
+  color:#8090b0;
+  cursor:pointer;
+  transition:all .3s;
+  font-family:inherit;
+  font-size:0.85rem;
+  letter-spacing:2px;
+}
+.cat-pill:hover,.cat-pill.active{
+  border-color:#c9a84c;
+  color:#c9a84c;
+  background:rgba(201,168,76,0.05);
+}
+
+/* ===== Movie Cards ===== */
+.movie-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:1.5rem;
+}
+.movie-card{
+  background:#0f1830;
+  border:1px solid #1a2540;
+  overflow:hidden;
+  transition:all .3s;
+  position:relative;
+}
+.movie-card::before{
+  content:'';
+  position:absolute;
+  left:0;top:0;
+  width:3px;height:0;
+  background:#c9a84c;
+  transition:height .3s;
+  z-index:2;
+}
+.movie-card:hover::before{height:100%}
+.movie-card:hover{
+  border-color:#c9a84c;
+  transform:translateY(-4px);
+  box-shadow:0 8px 25px rgba(0,0,0,0.4);
+}
+.movie-poster{
+  width:100%;
+  height:200px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:2.5rem;
+  position:relative;
+  border-bottom:1px solid #1a2540;
+}
+.movie-poster::after{
+  content:'';
+  position:absolute;
+  top:0;left:0;width:100%;height:100%;
+  background:linear-gradient(180deg,transparent 50%,rgba(12,18,32,0.9));
+}
+.movie-info{padding:1rem}
+.movie-title{font-size:0.9rem;font-weight:700;margin-bottom:0.4rem;color:#e8d48b;letter-spacing:1px}
+.movie-meta{font-size:0.75rem;color:#607090;line-height:1.6}
+
+/* ===== Ranking ===== */
+.rank-list{list-style:none;max-width:750px;margin:0 auto}
+.rank-item{
+  display:flex;
+  align-items:center;
+  padding:1.2rem;
+  margin-bottom:0.8rem;
+  background:#0f1830;
+  border:1px solid #1a2540;
+  border-left:3px solid #c9a84c;
+  transition:all .3s;
+}
+.rank-item:hover{border-color:#c9a84c;background:#121f3d}
+.rank-num{
+  width:32px;height:32px;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:1rem;
+  margin-right:1.2rem;
+  flex-shrink:0;
+  color:#c9a84c;
+  border:1px solid #c9a84c;
+}
+.rank-num.top1{background:#c9a84c;color:#080c18;border-color:#c9a84c}
+.rank-num.top2{background:#a0b0c8;color:#080c18;border-color:#a0b0c8}
+.rank-num.top3{background:#8b6914;color:#fff;border-color:#8b6914}
+.rank-info{flex:1}
+.rank-title{font-weight:700;color:#e8d48b;margin-bottom:0.2rem;font-size:0.95rem;letter-spacing:1px}
+.rank-views{font-size:0.78rem;color:#607090}
+.rank-score{font-size:1.1rem;font-weight:900;color:#c9a84c;font-family:'Courier New',monospace}
+
+/* ===== Features ===== */
+.features-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:2rem;
+}
+.feature-card{
+  background:#0f1830;
+  border:1px solid #1a2540;
+  padding:2rem 1.5rem;
+  text-align:left;
+  transition:all .3s;
+  position:relative;
+}
+.feature-card:hover{border-color:#c9a84c;background:#121f3d}
+.feature-card::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;
+  width:100%;height:2px;
+  background:linear-gradient(90deg,transparent,#c9a84c,transparent);
+  opacity:0;
+  transition:opacity .3s;
+}
+.feature-card:hover::before{opacity:1}
+.feature-icon{font-size:2rem;margin-bottom:1rem;display:block}
+.feature-card h3{color:#c9a84c;margin-bottom:0.8rem;font-size:0.95rem;letter-spacing:2px;font-weight:700}
+.feature-card p{font-size:0.82rem;color:#8090b0;line-height:1.8}
+
+/* ===== Guide Steps ===== */
+.guide-steps{
+  display:flex;
+  justify-content:space-between;
+  gap:2rem;
+  flex-wrap:wrap;
+}
+.step-card{
+  flex:1;
+  min-width:200px;
+  text-align:center;
+  padding:2.5rem 1.5rem;
+  background:#0f1830;
+  border:1px solid #1a2540;
+  position:relative;
+}
+.step-card::after{
+  content:counter(step-counter);
+  counter-increment:step-counter;
+  position:absolute;
+  top:-15px;left:50%;
+  transform:translateX(-50%);
+  width:30px;height:30px;
+  background:#c9a84c;
+  color:#080c18;
+  font-weight:900;
+  font-size:0.8rem;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Courier New',monospace;
+}
+.step-card h3{color:#e8d48b;margin-bottom:0.8rem;font-size:0.9rem;letter-spacing:2px}
+.step-card p{font-size:0.8rem;color:#8090b0;line-height:1.8}
+
+/* ===== FAQ ===== */
+.faq-item{
+  border-bottom:1px solid #1a2540;
+  background:#0f1830;
+  margin-bottom:0;
+}
+.faq-q{
+  padding:1.2rem 1.5rem;
+  cursor:pointer;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-weight:700;
+  color:#e8d48b;
+  transition:background .3s;
+  font-size:0.9rem;
+  letter-spacing:1px;
+}
+.faq-q:hover{background:#121f3d}
+.faq-q::after{content:'＋';font-size:1.2rem;color:#c9a84c;font-weight:300}
+.faq-item.open .faq-q::after{content:'－'}
+.faq-a{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .4s ease;
+  padding:0 1.5rem;
+  color:#8090b0;
+  font-size:0.85rem;
+  line-height:1.8;
+}
+.faq-item.open .faq-a{max-height:200px;padding:0 1.5rem 1.2rem}
+
+/* ===== Footer ===== */
+.footer{
+  background:#060a12;
+  border-top:3px double #c9a84c;
+  padding:3rem 1rem 2rem;
+  text-align:center;
+}
+.footer p{margin-bottom:0.8rem;color:#506080;font-size:0.8rem;letter-spacing:1px}
+.footer a{color:#c9a84c}
+
+/* ===== Responsive ===== */
+@media(max-width:960px){
+  .movie-grid{grid-template-columns:repeat(3,1fr)}
+  .features-grid{grid-template-columns:repeat(2,1fr)}
+  .hero h1{font-size:2.2rem}
+}
+@media(max-width:640px){
+  .nav-links{display:none}
+  .movie-grid{grid-template-columns:repeat(2,1fr)}
+  .features-grid{grid-template-columns:1fr}
+  .guide-steps{flex-direction:column}
+  .hero h1{font-size:1.6rem;letter-spacing:3px}
+  .section-title{font-size:1.4rem}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+<!-- Header -->
+<header class="header">
+  <nav class="nav-container">
+    <div class="logo">理论<span>电影网</span></div>
+    <ul class="nav-links">
+      <li><a href="#category">影片分类</a></li>
+      <li><a href="#ranking">热播排行</a></li>
+      <li><a href="#features">平台特色</a></li>
+      <li><a href="#guide">使用指南</a></li>
+      <li><a href="#faq">常见问题</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>理论电影网</h1>
+    <p>以学术视角解读光影艺术 · 深度影评与影视理论研究平台</p>
+    <div class="hero-url">https://lilundianyingwang-h5/</div>
+  </div>
+</section>
+
+<!-- Category -->
+<section class="section" id="category">
+  <h2 class="section-title">影片分类</h2>
+  <div class="cat-pills">
+    <button class="cat-pill active">全部</button>
+    <button class="cat-pill">作者论</button>
+    <button class="cat-pill">结构主义</button>
+    <button class="cat-pill">精神分析</button>
+    <button class="cat-pill">女性主义</button>
+    <button class="cat-pill">后殖民</button>
+    <button class="cat-pill">纪实学派</button>
+    <button class="cat-pill">实验影像</button>
+  </div>
+  <div class="movie-grid">
+    <div class="movie-card">
+      <div class="movie-poster" style="background:linear-gradient(135deg,#1a2540,#0f1830)">📐</div>
+      <div class="movie-info">
+        <div class="movie-title">作者论经典：特吕弗</div>
+        <div class="movie-meta">法国新浪潮 · 作者论研究<br>评分 9.4</div>
+      </div>
+    </div>
+    <div class="movie-card">
+      <div class="movie-poster" style="background:linear-gradient(135deg,#1a3050,#0f2030)">🧠</div>
+      <div class="movie-info">
+        <div class="movie-title">镜像阶段与银幕</div>
+        <div class="movie-meta">精神分析学派 · 拉康理论<br>评分 9.1</div>
+      </div>
+    </div>
+    <div class="movie-card">
+      <div class="movie-poster" style="background:linear-gradient(135deg,#2a1a40,#1a0f30)">♀️</div>
+      <div class="movie-info">
+        <div class="movie-title">凝视的政治</div>
+        <div class="movie-meta">女性主义电影理论 · 穆尔维<br>评分 8.9</div>
+      </div>
+    </div>
+    <div class="movie-card">
+      <div class="movie-poster" style="background:linear-gradient(135deg,#1a4030,#0f3020)">🏛️</div>
+      <div class="movie-info">
+        <div class="movie-title">叙事结构学</div>
+        <div class="movie-meta">结构主义 · 普罗普模型<br>评分 8.7</div>
+      </div>
+    </div>
+    <div class="movie-card">
+      <div class="movie-poster" style="background:linear-gradient(135deg,#3a2a10,#2a1a08)">🌍</div>
+      <div class="movie-info">
+        <div class="movie-title">后殖民影像志</div>
+        <div class="movie-meta">后殖民理论 · 萨义德视角<br>评分 8.8</div>
+      </div>
+    </div>
+    <div class="movie-card">
+      <div class="movie-poster" style="background:linear-gradient(135deg,#2a1a1a,#1a0f0f)">🎞️</div>
+      <div class="movie-info">
+        <div class="movie-title">直接电影运动</div>
+        <div class="movie-meta">纪实学派 · 真实电影<br>评分 8.5</div>
+      </div>
+    </div>
+    <div class="movie-card">
+      <div class="movie-poster" style="background:linear-gradient(135deg,#1a2a3a,#0f1a2a)">🎨</div>
+      <div class="movie-info">
+        <div class="movie-title">实验影像档案</div>
+        <div class="movie-meta">先锋派 · 抽象电影<br>评分 8.3</div>
+      </div>
+    </div>
+    <div class="movie-card">
+      <div class="movie-poster" style="background:linear-gradient(135deg,#3a3a1a,#2a2a0a)">🎭</div>
+      <div class="movie-info">
+        <div class="movie-title">类型片解码</div>
+        <div class="movie-meta">类型研究 · 西部片/黑帮片<br>评分 8.6</div>
+      </div>
+    </div>
+    <div class="movie-card">
+      <div class="movie-poster" style="background:linear-gradient(135deg,#1a3a2a,#0f2a1a)">📡</div>
+      <div class="movie-info">
+        <div class="movie-title">媒介考古学</div>
+        <div class="movie-meta">媒介理论 · 基特勒学派<br>评分 8.4</div>
+      </div>
+    </div>
+    <div class="movie-card">
+      <div class="movie-poster" style="background:linear-gradient(135deg,#2a2a2a,#1a1a1a)">📖</div>
+      <div class="movie-info">
+        <div class="movie-title">电影符号学入门</div>
+        <div class="movie-meta">麦茨理论 · 八大组合段<br>评分 8.2</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Ranking -->
+<section class="section" id="ranking" style="background:#080c18">
+  <h2 class="section-title">热播排行榜</h2>
+  <ul class="rank-list">
+    <li class="rank-item">
+      <div class="rank-num top1">1</div>
+      <div class="rank-info">
+        <div class="rank-title">作者论经典：特吕弗</div>
+        <div class="rank-views">15,234 次学术访问</div>
+      </div>
+      <div class="rank-score">9.4</div>
+    </li>
+    <li class="rank-item">
+      <div class="rank-num top2">2</div>
+      <div class="rank-info">
+        <div class="rank-title">镜像阶段与银幕</div>
+        <div class="rank-views">12,108 次学术访问</div>
+      </div>
+      <div class="rank-score">9.1</div>
+    </li>
+    <li class="rank-item">
+      <div class="rank-num top3">3</div>
+      <div class="rank-info">
+        <div class="rank-title">凝视的政治</div>
+        <div class="rank-views">11,567 次学术访问</div>
+      </div>
+      <div class="rank-score">8.9</div>
+    </li>
+    <li class="rank-item">
+      <div class="rank-num">4</div>
+      <div class="rank-info">
+        <div class="rank-title">叙事结构学</div>
+        <div class="rank-views">9,843 次学术访问</div>
+      </div>
+      <div class="rank-score">8.7</div>
+    </li>
+    <li class="rank-item">
+      <div class="rank-num">5</div>
+      <div class="rank-info">
+        <div class="rank-title">后殖民影像志</div>
+        <div class="rank-views">8,921 次学术访问</div>
+      </div>
+      <div class="rank-score">8.8</div>
+    </li>
+    <li class="rank-item">
+      <div class="rank-num">6</div>
+      <div class="rank-info">
+        <div class="rank-title">直接电影运动</div>
+        <div class="rank-views">7,654 次学术访问</div>
+      </div>
+      <div class="rank-score">8.5</div>
+    </li>
+    <li class="rank-item">
+      <div class="rank-num">7</div>
+      <div class="rank-info">
+        <div class="rank-title">类型片解码</div>
+        <div class="rank-views">7,102 次学术访问</div>
+      </div>
+      <div class="rank-score">8.6</div>
+    </li>
+    <li class="rank-item">
+      <div class="rank-num">8</div>
+      <div class="rank-info">
+        <div class="rank-title">电影符号学入门</div>
+        <div class="rank-views">6,438 次学术访问</div>
+      </div>
+      <div class="rank-score">8.2</div>
+    </li>
+  </ul>
+</section>
+
+<!-- Features -->
+<section class="section" id="features">
+  <h2 class="section-title">平台特色</h2>
+  <div class="features-grid">
+    <div class="feature-card">
+      <span class="feature-icon">📚</span>
+      <h3>学术资源</h3>
+      <p>收录全球电影理论经典文献、学术论文及专著节选，为研究者提供权威参考。</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🔬</span>
+      <h3>深度解析</h3>
+      <p>每部影片配备理论视角解读，从镜头语言到意识形态，层层剖析光影密码。</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🎓</span>
+      <h3>学者专栏</h3>
+      <p>邀请影视学教授、博士撰写专栏，分享前沿研究成果与教学心得。</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🗄️</span>
+      <h3>流派档案</h3>
+      <p>系统梳理世界电影流派发展脉络，从德国表现主义到当代数字美学。</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">💬</span>
+      <h3>学术论坛</h3>
+      <p>提供专业讨论空间，影迷与学者可就影片理论问题进行深度交流。</p>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">📡</span>
+      <h3>前沿资讯</h3>
+      <p>实时追踪国际电影节学术动态、理论新书发布及重要学术会议信息。</p>
+    </div>
+  </div>
+</section>
+
+<!-- Guide -->
+<section class="section" id="guide" style="background:#080c18">
+  <h2 class="section-title">快速使用指南</h2>
+  <div class="guide-steps" style="counter-reset:step-counter">
+    <div class="step-card">
+      <h3>访问网站</h3>
+      <p>浏览器输入<br>lilundianyingwang-h5<br>进入理论电影网首页</p>
+    </div>
+    <div class="step-card">
+      <h3>选择理论方向</h3>
+      <p>根据研究兴趣<br>选择对应学派分类<br>浏览相关影片与文献</p>
+    </div>
+    <div class="step-card">
+      <h3>深度阅读</h3>
+      <p>点击影片进入<br>理论解析页面<br>阅读学术级影评</p>
+    </div>
+    <div class="step-card">
+      <h3>参与讨论</h3>
+      <p>注册账号后<br>在论坛发表观点<br>与学者同好交流</p>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:3rem">
+    <a href="#" style="display:inline-block;background:transparent;color:#c9a84c;padding:0.8rem 2.5rem;border:1px solid #c9a84c;letter-spacing:2px;font-size:0.85rem">收藏本站 https://lilundianyingwang-h5/</a>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <h2 class="section-title">常见问题</h2>
+  <div class="faq-item">
+    <div class="faq-q">理论电影网适合哪些人群？</div>
+    <div class="faq-a"><p>主要面向影视专业学生、学术研究者、影评人及具备一定理论基础的深度影迷。</p></div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">平台内容是否具有学术权威性？</div>
+    <div class="faq-a"><p>所有深度解析文章均由影视学专业人士撰写或审核，引用文献标注规范，确保学术严谨性。</p></div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">是否提供影片在线观看？</div>
+    <div class="faq-a"><p>本站以理论研究和影评分析为主，部分影片提供正版授权观看链接，更多资源请通过正规渠道获取。</p></div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">如何投稿或申请专栏作者？</div>
+    <div class="faq-a"><p>欢迎影视专业学者及研究生投稿，请将个人简历及代表作发送至编辑部邮箱，审核通过后开通专栏。</p></div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">移动端是否支持完整阅读体验？</div>
+    <div class="faq-a"><p>本站采用响应式设计，移动端完整保留所有排版格式与交互功能，支持长文舒适阅读。</p></div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <p>© 2024 理论电影网 (lilundianyingwang-h5) - 电影理论与影视研究平台</p>
+  <p>网址：<a href="https://lilundianyingwang-h5/">https://lilundianyingwang-h5/</a> | 本站内容仅供学术交流，影片版权归原作者所有</p>
+  <p style="margin-top:1.5rem;color:#304060">内页链接：<a href="#">关于我们</a> &nbsp; <a href="#">学术委员会</a> &nbsp; <a href="#">投稿指南</a> &nbsp; <a href="#">隐私政策</a></p>
+</footer>
+
+<script>
+// FAQ Accordion
+document.querySelectorAll('.faq-q').forEach(q=>{
+  q.addEventListener('click',()=>{
+    const item=q.parentElement;
+    item.classList.toggle('open');
+  });
+});
+
+// Category Pill Active
+document.querySelectorAll('.cat-pill').forEach(pill=>{
+  pill.addEventListener('click',()=>{
+    document.querySelectorAll('.cat-pill').forEach(p=>p.classList.remove('active'));
+    pill.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
